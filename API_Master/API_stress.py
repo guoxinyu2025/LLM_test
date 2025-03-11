@@ -1,10 +1,6 @@
 # main.py
-
-import requests
-import json
 import api_config  # 导入api_requests列表
 import request_sender
-
 
 # 调用所有接口
 if __name__ == "__main__":
