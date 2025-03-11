@@ -1,4 +1,4 @@
-# 配置字典，存储每个请求的参数
+# api_config.py
 api_requests = [
     {
         "name": "OpenAI-chat",
