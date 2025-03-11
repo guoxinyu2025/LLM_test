@@ -32,6 +32,7 @@ if __name__ == "__main__":
 
     # 计算并打印成功率
     success_rate = (successful_requests / total_requests) * 100
+    print("-----------------------------------------------------------------------------------")
     print(f"Total requests: {total_requests}")
     print(f"Successful requests: {successful_requests}")
     print(f"Success rate: {success_rate:.2f}%")
