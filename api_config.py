@@ -1,4 +1,4 @@
-# 配置字典，存储每个请求的参数
+# 配置字典，存储每个请求的参
 api_requests = [
     {
         "name": "OpenAI-chat",
