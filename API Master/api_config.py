@@ -8,7 +8,7 @@ api_requests = [
             'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
         },
         "data": {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4o-mini",
             "messages": [
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": "给我讲一个短故事，20字左右"}
