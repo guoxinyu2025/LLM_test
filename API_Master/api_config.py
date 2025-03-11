@@ -89,5 +89,21 @@ api_requests = [
             "size": "1024x1024",
             "response_format": "url"
         }
+    },
+    {
+        "name": "Agent-Info",
+        "url": "https://llmprovider-staging-chatsvc.sensetest.click/v1/agent/info",
+        "params": {
+            "model": "agent_taro"
+        },
+        "headers": {
+            'Accept': '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Authorization': 'Bearer sk-S5QcoqN55OItMvmCv6uMYuNDOQAkG1f2kc5mQHQQ1dB0B525AeD444B6872c06D265926b5a',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'User-Agent': 'PostmanRuntime-ApipostRuntime/1.1.0'
+        },
+        "method": "GET"
     }
 ]
