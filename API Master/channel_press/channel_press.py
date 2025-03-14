@@ -5,7 +5,7 @@ import requests
 import openai  # 假设这是OpenAI的Python客户端库
 
 openai_api_url = "http://127.0.0.1:8082/v1/chat/completions"
-api_key = "sk-xSVYtgauROy87h5u8Fa5SJ0O4Jft58sPZu4yQnsk5c70C0B7B1Fc4969Bd27C9C25308F5Af"
+api_key = ""
 
 
 # 请求体结构

@@ -5,7 +5,7 @@ api_requests = [
         "url": "https://platform.llmprovider.ai/v1/chat/completions",
         "headers": {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
+            'Authorization': f''
         },
         "data": {
             "model": "gpt-4o-mini",
@@ -24,7 +24,7 @@ api_requests = [
         "url": "https://platform.llmprovider.ai/v1/completions",
         "headers": {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
+            'Authorization': f''
         },
         "data": {
             "model": "gpt-3.5-turbo-instruct",
@@ -39,7 +39,7 @@ api_requests = [
         "url": "https://platform.llmprovider.ai/v1/embeddings",
         "headers": {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
+            'Authorization': f''
         },
         "data": {
             "model": "text-embedding-ada-002",
@@ -52,7 +52,7 @@ api_requests = [
         "url": "https://platform.llmprovider.ai/v1/audio/speech",
         "headers": {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
+            'Authorization': f''
         },
         "data": {
             "model": "tts-1",
@@ -66,7 +66,7 @@ api_requests = [
         "name": "OpenAI-Transcription",
         "url": "https://platform.llmprovider.ai/v1/audio/transcriptions",
         "headers": {
-            'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
+            'Authorization': f''
         },
         "files": {
             'file': open('C:/guoxinyu.vendor/桌面/17.mp3', 'rb'),
@@ -80,30 +80,15 @@ api_requests = [
         "url": "https://platform.llmprovider.ai/v1/images/generations",
         "headers": {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer sk-W4MwIyrP1iE9t0lM8hfs5kQ6cWgv6twIAgV7ki0L7d4c9d89A0Bc4096A0A4BcFd858f2a31'
-        },
+            'Authorization': f'',
         "data": {
             "model": "dall-e-3",
             "prompt": "A cute baby sea otter",
             "n": 1,
             "size": "1024x1024",
-            "response_format": "url"
+            "response_format": "url",
+        },
         }
-    },
-    {
-        "name": "Agent-Info",
-        "url": "https://llmprovider-staging-chatsvc.sensetest.click/v1/agent/info",
-        "params": {
-            "model": "agent_taro"
-        },
-        "headers": {
-            'Accept': '*/*',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Authorization': 'Bearer sk-S5QcoqN55OItMvmCv6uMYuNDOQAkG1f2kc5mQHQQ1dB0B525AeD444B6872c06D265926b5a',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json',
-            'User-Agent': 'PostmanRuntime-ApipostRuntime/1.1.0'
-        },
-        "method": "GET"
     }
+
 ]
