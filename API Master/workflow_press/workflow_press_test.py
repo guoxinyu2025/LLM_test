@@ -10,7 +10,7 @@ import html
 CONCURRENT_THREADS = 1
 TEST_DURATION = 10
 TARGET_URL = 'https://api.senseflow-test.sensetime.com/v1/workflows/run'
-AUTH_TOKEN = 'app-fXWlQDJpS0176MBLv3AOrtnr'
+AUTH_TOKEN = ''
 
 # URL列表
 URL_LIST = [
