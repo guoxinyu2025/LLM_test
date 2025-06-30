@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import html
 from html_report_generator import create_html_report
 from url_config import URL_LIST
+from request_templates import get_template, print_available_templates, list_available_templates
 
 # 注释
 # 配置参数
@@ -15,28 +16,7 @@ TEST_DURATION = 10
 TARGET_URL = 'https://api.senseflow-test.sensetime.com/v1/workflows/run'
 AUTH_TOKEN = 'app-IrCFq1GXD9ZbG6xSK9shqTiZ'
 
-# 基础请求模板
-BASE_REQUEST_BODY = {
-    "inputs": {
-        "file": None,  # 动态填充
-        "a": {
-            "dify_model_identity": "__dify__file__",
-            "id": None,
-            "tenant_id": "fd70f75c-34b8-4bac-9edf-d9b944484068",
-            "type": "image",
-            "transfer_method": "remote_url",
-            "remote_url": None,  # 动态填充
-            "related_id": "446c3728-30ca-4f23-8719-2b7f86ec0db6",
-            "filename": "logo.png",
-            "extension": ".png",
-            "mime_type": "image/png",
-            "size": 8669,
-            "url": None  # 动态填充
-        }
-    },
-    "user": "abc-123",
-    "response_mode": "streaming"
-}
+# 移除原有的BASE_REQUEST_BODY，改为动态获取
 
 # 扩展统计信息结构                             
 stats = {
@@ -53,6 +33,37 @@ stats = {
 # 全局变量用于进度显示
 test_start_time = None
 test_duration_seconds = TEST_DURATION
+selected_template = None  # 存储选择的模板
+
+def select_request_template():
+    """让用户选择请求体模板"""
+    print_available_templates()
+    
+    while True:
+        try:
+            choice = input("请选择请求体模板 (输入模板名称或编号): ").strip()
+            
+            # 如果输入的是数字，转换为模板名称
+            if choice.isdigit():
+                template_list = list_available_templates()
+                index = int(choice) - 1
+                if 0 <= index < len(template_list):
+                    choice = template_list[index]
+                else:
+                    print(f"无效的编号，请输入1-{len(template_list)}之间的数字")
+                    continue
+            
+            # 获取模板
+            template = get_template(choice)
+            print(f"已选择模板: {choice}")
+            return template, choice
+            
+        except ValueError as e:
+            print(f"错误: {e}")
+            print("请重新选择")
+        except KeyboardInterrupt:
+            print("\n用户取消选择")
+            exit(0)
 
 def format_time(seconds):
     """格式化时间显示"""
@@ -98,7 +109,7 @@ def display_progress():
             
         time.sleep(1)  # 每秒更新一次
 
-def make_request():
+def make_request(template):
     """发送单个请求的函数"""
     while True:
         # 检查是否测试时间已到
@@ -109,10 +120,22 @@ def make_request():
         url = random.choice(URL_LIST)
         
         # 构建请求体
-        request_body = BASE_REQUEST_BODY.copy()
-        request_body['inputs']['file'] = url
-        request_body['inputs']['a']['remote_url'] = url
-        request_body['inputs']['a']['url'] = url
+        request_body = template.copy()
+        
+        # 根据模板类型填充不同的字段
+        if 'file' in request_body.get('inputs', {}):
+            request_body['inputs']['file'] = url
+        if 'a' in request_body.get('inputs', {}):
+            if 'remote_url' in request_body['inputs']['a']:
+                request_body['inputs']['a']['remote_url'] = url
+            if 'url' in request_body['inputs']['a']:
+                request_body['inputs']['a']['url'] = url
+        if 'image' in request_body.get('inputs', {}):
+            request_body['inputs']['image'] = url
+        if 'text' in request_body.get('inputs', {}):
+            request_body['inputs']['text'] = f"测试文本内容 - {url[:20]}"
+        if 'document' in request_body.get('inputs', {}):
+            request_body['inputs']['document'] = url
         
         # 记录请求开始时间
         start_time = datetime.now()
@@ -196,6 +219,9 @@ def main():
     print(f"URL池大小: {len(URL_LIST)}")
     print("-" * 50)
     
+    # 选择请求体模板
+    selected_template, template_name = select_request_template()
+    
     # 记录测试开始时间
     test_start_time = datetime.now()
     
@@ -207,7 +233,7 @@ def main():
     # 创建并启动请求线程
     threads = []
     for i in range(CONCURRENT_THREADS):
-        thread = threading.Thread(target=make_request)
+        thread = threading.Thread(target=make_request, args=(selected_template,))
         thread.daemon = True
         thread.start()
         threads.append(thread)
@@ -242,6 +268,7 @@ def main():
     print("\n" + "=" * 50)
     print("测试完成！")
     print("=" * 50)
+    print(f"使用的模板: {template_name}")
     print(f"总请求数: {total_requests}")
     print(f"成功请求: {success_count}")
     print(f"失败请求: {error_count}")
