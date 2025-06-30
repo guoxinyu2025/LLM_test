@@ -14,7 +14,7 @@ from request_templates import get_template, print_available_templates, list_avai
 CONCURRENT_THREADS = 1
 TEST_DURATION = 10
 TARGET_URL = 'https://api.senseflow-test.sensetime.com/v1/workflows/run'
-AUTH_TOKEN = 'app-IrCFq1GXD9ZbG6xSK9shqTiZ'
+AUTH_TOKEN = ''
 
 # 移除原有的BASE_REQUEST_BODY，改为动态获取
 
