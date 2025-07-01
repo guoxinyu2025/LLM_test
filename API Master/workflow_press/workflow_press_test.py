@@ -15,7 +15,7 @@ from utils.test_functions import format_time, display_progress, make_request
 CONCURRENT_THREADS = 1
 TEST_DURATION = 10
 TARGET_URL = 'https://api.senseflow-test.sensetime.com/v1/workflows/run'
-AUTH_TOKEN = 'app-dN3IwWHSGV0PPpMwC5MV5Vrl'
+AUTH_TOKEN = ''
 
 # 移除原有的BASE_REQUEST_BODY，改为动态获取
 
